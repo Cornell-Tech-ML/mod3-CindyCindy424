@@ -483,21 +483,49 @@ def _tensor_matrix_multiply(
     #    c) Compute the dot produce for position c[i, j]
     # TODO: Implement for Task 3.4.
     # raise NotImplementedError("Need to implement for Task 3.4")
-    accum = 0.0
+    # accum = 0.0
+    # for k_start in range(0, a_shape[2], BLOCK_DIM):
+    #     k = k_start + pj
+    #     if i < a_shape[1] and k < a_shape[2]:
+    #         a_shared[pi, pj] = a_storage[a_batch_stride * batch * a_strides[1] * i + a_strides[2] * k]
+    #     k = k_start + pi
+    #     if j < b_shape[2] and k < b_shape[1]:
+    #         b_shared[pi, pj] = b_storage[b_batch_stride * batch * b_strides[1] * k + b_strides[2] * j]
+    #     cuda.syncthreads()
+    
+    #     for k in range(BLOCK_DIM):
+    #         if (k_start + k) < a_shape[2]:
+    #             accum += a_shared[pi, k] * b_shared[k, pj]
+    
+    # if i < out_shape[1] and j < out_shape[2]:
+    #     out[out_strides[0] * batch * out_strides[1] * i + out_strides[2] * j] = accum
+
     for k_start in range(0, a_shape[2], BLOCK_DIM):
-        k = k_start + pj
-        if i < a_shape[1] and k < a_shape[2]:
-            a_shared[pi, pj] = a_storage[a_batch_stride * batch * a_strides[1] * i + a_strides[2] * k]
-        k = k_start + pi
-        if j < b_shape[2] and k < b_shape[1]:
-            b_shared[pi, pj] = b_storage[b_batch_stride * batch * b_strides[1] * k + b_strides[2] * j]
+        # 初始化共享内存
+        if (pi < BLOCK_DIM and pj < BLOCK_DIM):
+            a_shared[pi, pj] = 0.0
+            b_shared[pi, pj] = 0.0
         cuda.syncthreads()
-    
-        for k in range(BLOCK_DIM):
-            if (k_start + k) < a_shape[2]:
+        
+        # 加载数据到共享内存
+        if (i < a_shape[1] and k_start + pj < a_shape[2]):
+            a_shared[pi, pj] = a_storage[
+                batch * a_batch_stride + i * a_strides[1] + (k_start + pj) * a_strides[2]
+            ]
+        if (k_start + pi < b_shape[1] and j < b_shape[2]):
+            b_shared[pi, pj] = b_storage[
+                batch * b_batch_stride + (k_start + pi) * b_strides[1] + j * b_strides[2]
+            ]
+        cuda.syncthreads()
+        
+        # 计算当前块的乘积
+        if i < out_shape[1] and j < out_shape[2]:
+            for k in range(min(BLOCK_DIM, a_shape[2] - k_start)):
                 accum += a_shared[pi, k] * b_shared[k, pj]
-    
+        cuda.syncthreads()
+
+    # 写入结果
     if i < out_shape[1] and j < out_shape[2]:
-        out[out_strides[0] * batch * out_strides[1] * i + out_strides[2] * j] = accum
+        out[batch * out_strides[0] + i * out_strides[1] + j * out_strides[2]] = accum
 
 tensor_matrix_multiply = jit(_tensor_matrix_multiply)
