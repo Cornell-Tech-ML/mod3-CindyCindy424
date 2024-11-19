@@ -35,7 +35,7 @@ The files that will be synced are:
 
 # Results
 
-## Task 3-1 Diagnostics Output
+## Task 3-1 and 3-2 Diagnostics Output
 
 ```
 MAP
