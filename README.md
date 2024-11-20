@@ -362,28 +362,57 @@ I ran the tests on the colab GPU environment, and got all tests passed successfu
 ![alt text](pic/image-1.png)
 
 ## Task 3_4 Timing Graph
+After completing task3_4, I ran the script and got the following comparisions:
+```
+{'fast': np.float64(0.014949401219685873), 'gpu': np.float64(0.012905279795328775)}
+Running size 256
+{'fast': np.float64(0.0841817855834961), 'gpu': np.float64(0.04065275192260742)}
+Running size 512
+{'fast': np.float64(0.9403990109761556), 'gpu': np.float64(0.1680622100830078)}
+Running size 1024
+{'fast': np.float64(7.382461706797282), 'gpu': np.float64(0.7710942427317301)}
 
-
+Timing summary
+Size: 64
+    fast: 0.00282
+    gpu: 0.00541
+Size: 128
+    fast: 0.01495
+    gpu: 0.01291
+Size: 256
+    fast: 0.08418
+    gpu: 0.04065
+Size: 512
+    fast: 0.94040
+    gpu: 0.16806
+Size: 1024
+    fast: 7.38246
+    gpu: 0.77109
+```
+![alt text](pic/image-10.png)
 
 ## Task 3_5: 
 > 3_5 (1): Train a tensor model and add your results for all dataset to the README.
 
 ### Task3_5 (1) - GPU + 'simple'
+![alt text](pic/image-6.png)
 
 ### Task3_5 (1) - CPU + 'simple'
+![alt text](pic/image-7.png)
 
 ### Task3_5 (1) - GPU + 'xor'
+![alt text](pic/image-4.png)
 
 ### Task3_5 (1) - CPU + 'xor'
-
 ![alt text](pic/image-3.png)
 
-### Task3_5 (1) - GPU + 'split'
 
+### Task3_5 (1) - GPU + 'split'
 ![alt text](pic/image-2.png)
 
-### Task3_5 (1) - CPU + 'split'
 
+### Task3_5 (1) - CPU + 'split'
+![alt text](pic/image-5.png)
 
 
 
@@ -391,5 +420,7 @@ I ran the tests on the colab GPU environment, and got all tests passed successfu
 > 3_5 (2): Run a bigger model and record the time per epoch reported by the trainer.
 
 ### Task3_5 (2) - Bigger Model on GPU
+![alt text](pic/image-8.png)
 
 ### Task3_5 (2) - Bigger Model on CPU
+![alt text](pic/image-9.png)
