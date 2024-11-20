@@ -361,8 +361,35 @@ I ran the tests on the colab GPU environment, and got all tests passed successfu
 
 ![alt text](pic/image-1.png)
 
+## Task 3_4 Timing Graph
+
+
+
 ## Task 3_5: 
 > 3_5 (1): Train a tensor model and add your results for all dataset to the README.
 
+### Task3_5 (1) - GPU + 'simple'
+
+### Task3_5 (1) - CPU + 'simple'
+
+### Task3_5 (1) - GPU + 'xor'
+
+### Task3_5 (1) - CPU + 'xor'
+
+![alt text](pic/image-3.png)
+
+### Task3_5 (1) - GPU + 'split'
+
+![alt text](pic/image-2.png)
+
+### Task3_5 (1) - CPU + 'split'
+
+
+
+
 
 > 3_5 (2): Run a bigger model and record the time per epoch reported by the trainer.
+
+### Task3_5 (2) - Bigger Model on GPU
+
+### Task3_5 (2) - Bigger Model on CPU
