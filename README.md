@@ -391,6 +391,7 @@ Size: 1024
 ```
 ![alt text](pic/image-10.png)
 
+
 ## Task 3_5: 
 > 3_5 (1): Train a tensor model and add your results for all dataset to the README.
 
@@ -417,6 +418,7 @@ Size: 1024
 
 
 
+
 > 3_5 (2): Run a bigger model and record the time per epoch reported by the trainer.
 
 ### Task3_5 (2) - Bigger Model on GPU
@@ -424,3 +426,4 @@ Size: 1024
 
 ### Task3_5 (2) - Bigger Model on CPU
 ![alt text](pic/image-9.png)
+
