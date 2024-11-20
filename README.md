@@ -354,13 +354,12 @@ I ran the tests on the colab GPU environment, and got all tests passed successfu
 
 ![alt text](pic/image.png)
 
-
 ## Test Result for Task3_4
 I ran the tests on the colab GPU environment, and got all tests passed successfully.
 
 (Note: Warnings appeared along the way, but as instructed on Ed, did not spend time fixing the warning since it's not required)
 
-
+![alt text](pic/image-1.png)
 
 ## Task 3_5: 
 > 3_5 (1): Train a tensor model and add your results for all dataset to the README.

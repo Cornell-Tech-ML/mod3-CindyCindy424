@@ -4,6 +4,7 @@ Be sure you have minitorch installed in you Virtual Env.
 """
 
 import minitorch
+import time
 
 # Use this function to make a random parameter in
 # your module.
@@ -55,8 +56,10 @@ class Linear(minitorch.Module):
         return output + bias_reshaped
 
 
-def default_log_fn(epoch, total_loss, correct, losses):
-    print("Epoch ", epoch, " loss ", total_loss, "correct", correct)
+def default_log_fn(epoch, total_loss, correct, losses, epoch_time):
+    # print("Epoch ", epoch, " loss ", total_loss, "correct", correct)
+    print(f"Epoch {epoch}: Total Loss: {total_loss:.4f} | Correct : {correct} | Epoch Runtime: {epoch_time:.2f} seconds")
+
 
 
 class TensorTrain:
@@ -81,6 +84,8 @@ class TensorTrain:
 
         losses = []
         for epoch in range(1, self.max_epochs + 1):
+            start_time = time.time()
+
             total_loss = 0.0
             correct = 0
             optim.zero_grad()
@@ -96,6 +101,9 @@ class TensorTrain:
 
             # Update
             optim.step()
+
+            end_time = time.time()
+            epoch_time = end_time - start_time
 
             # Logging
             if epoch % 10 == 0 or epoch == max_epochs:
