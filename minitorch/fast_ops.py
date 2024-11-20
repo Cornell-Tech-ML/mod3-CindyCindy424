@@ -186,7 +186,6 @@ def tensor_map(
         else:
             for i in prange(len(out)):
                 out[i] = fn(in_storage[i])
-            
 
     return njit(_map, parallel=True)  # type: ignore
 
@@ -233,7 +232,7 @@ def tensor_zip(
             or (out_strides != a_strides).any()
             or (out_strides != b_strides).any()
             or (out_shape != a_shape).any()
-            or (out_shape != b_shape).any() 
+            or (out_shape != b_shape).any()
         ):
             for i in prange(len(out)):
                 out_index: Index = np.empty(MAX_DIMS, np.int32)
@@ -244,13 +243,14 @@ def tensor_zip(
                 broadcast_index(out_index, out_shape, a_shape, a_index)
                 j = index_to_position(a_index, a_strides)
                 # broadcast_index(out_index, out_shape, b_shape, a_index)
-                broadcast_index(out_index, out_shape, b_shape, b_index)  # Fixed to use b_index
+                broadcast_index(
+                    out_index, out_shape, b_shape, b_index
+                )  # Fixed to use b_index
                 k = index_to_position(b_index, b_strides)
                 out[o] = fn(a_storage[j], b_storage[k])
         else:
             for i in prange(len(out)):
                 out[i] = fn(a_storage[i], b_storage[i])
-
 
     return njit(_zip, parallel=True)  # type: ignore
 
